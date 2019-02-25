@@ -20,6 +20,16 @@ int main(int argc, char *argv[])
     {
         prepareScene();
         doInput();
+
+        if (app.up)
+        {
+            player.rect.y -= 4;
+        }
+        if (app.down)
+        {
+            player.rect.y += 4;
+        }
+
         drawEntity(player);
         presentScene();
         SDL_Delay(16);

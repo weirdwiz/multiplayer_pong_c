@@ -4,6 +4,8 @@ typedef struct
 {
     SDL_Renderer *renderer;
     SDL_Window *window;
+    int up;
+    int down;
 } App;
 
 typedef struct
