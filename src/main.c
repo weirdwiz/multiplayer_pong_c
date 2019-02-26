@@ -2,13 +2,14 @@
 
 int main(int argc, char *argv[])
 {
-    // idk what this is just go along
+    // idk what this, is just go along
     memset(&app, 0, sizeof(App));
     memset(&player, 0, sizeof(Entity));
-    player.rect.x = 10;
+
+    player.rect.x = 50;
     player.rect.y = 10;
     player.rect.h = 100;
-    player.rect.w = 10;
+    player.rect.w = 20;
     player.r = 255;
     player.g = 255;
     player.b = 255;
@@ -21,13 +22,13 @@ int main(int argc, char *argv[])
         prepareScene();
         doInput();
 
-        if (app.up)
+        if (app.up && (player.rect.y) >= 0)
         {
-            player.rect.y -= 4;
+            player.rect.y -= 10;
         }
-        if (app.down)
+        if (app.down && (player.rect.y + 100) <= SCREEN_HEIGHT)
         {
-            player.rect.y += 4;
+            player.rect.y += 10;
         }
 
         drawEntity(player);
