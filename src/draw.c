@@ -15,16 +15,10 @@ void drawRectangle(SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b) {
   SDL_RenderFillRect(app.renderer, rect);
 }
 
-void drawEntity(Object e) //, Object f)
+
+void drawEntity(Entity e)//, Entity f)
 {
-  drawRectangle(&e.rect, e.r, e.g, e.b);
+    drawRectangle(&e.rect, e.r, e.g, e.b);
   //  drawRectangle(&f.rect, f.r, f.g, f.b);
 }
 
-void drawBall(Ball e) { drawRectangle(&e.rect, e.r, e.g, e.b); }
-
-void draw() {
-  drawBall(ball);
-  drawEntity(player1);
-  drawEntity(player2);
-}
