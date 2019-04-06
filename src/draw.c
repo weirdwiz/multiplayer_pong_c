@@ -20,7 +20,11 @@ void drawRectangle(SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b)
     SDL_RenderFillRect(app.renderer, rect);
 }
 
-void drawEntity(Entity e)
+
+void drawEntity(Entity e)//, Entity f)
 {
     drawRectangle(&e.rect, e.r, e.g, e.b);
+  //  drawRectangle(&f.rect, f.r, f.g, f.b);
 }
+
+

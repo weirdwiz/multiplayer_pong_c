@@ -8,4 +8,5 @@ extern void doInput(void);
 extern void drawEntity(Entity e);
 extern void drawRectangle(SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b);
 App app;
-Entity player;
+Entity player1;
+Entity player2;
