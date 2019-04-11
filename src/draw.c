@@ -1,30 +1,24 @@
 #include "draw.h"
 
-void prepareScene(void)
-{
-    SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
-    SDL_RenderClear(app.renderer);
+void prepareScene(void) {
+  SDL_SetRenderDrawColor(app.renderer, 0, 0, 0, 255);
+  SDL_RenderClear(app.renderer);
 }
 
-void presentScene(void)
-{
-    SDL_RenderPresent(app.renderer);
+void presentScene(void) { SDL_RenderPresent(app.renderer); }
+
+void drawRectangle(SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b) {
+  // Set render color
+  SDL_SetRenderDrawColor(app.renderer, r, g, b, 255);
+
+  // Render rect
+  SDL_RenderFillRect(app.renderer, rect);
 }
 
-void drawRectangle(SDL_Rect *rect, Uint8 r, Uint8 g, Uint8 b)
+void drawEntity(Object e) //, Object f)
 {
-    // Set render color
-    SDL_SetRenderDrawColor(app.renderer, r, g, b, 255);
-
-    // Render rect
-    SDL_RenderFillRect(app.renderer, rect);
-}
-
-
-void drawEntity(Entity e)//, Entity f)
-{
-    drawRectangle(&e.rect, e.r, e.g, e.b);
+  drawRectangle(&e.rect, e.r, e.g, e.b);
   //  drawRectangle(&f.rect, f.r, f.g, f.b);
 }
 
-
+void drawBall(Ball e) { drawRectangle(&e.rect, e.r, e.g, e.b); }
