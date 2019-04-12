@@ -3,7 +3,7 @@
 int main(int argc, char *argv[]) {
   srand(time(0));
 
-  // idk what this, is just go along
+  // idk what is this, just go along
   memset(&app, 0, sizeof(App));
   memset(&player1, 0, sizeof(Object));
   memset(&player2, 0, sizeof(Object));
