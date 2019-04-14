@@ -1,8 +1,15 @@
 #include "main.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+
 
 int main(int argc, char *argv[]) {
   srand(time(0));
-
+  
+  TTF_Init();  // Intialise
+  TTF_Font *font;
+  font = TTF_OpenFont("/home/knownymous/Desktop/multiplayer_pong_c/src/OpenSans-Bold.ttf", 32);
+  SDL_Surface *screen, *text;
   // idk what this, is just go along
   memset(&app, 0, sizeof(App));
   memset(&player1, 0, sizeof(Object));
@@ -39,13 +46,15 @@ int main(int argc, char *argv[]) {
   ball.x_vel = 8;
   ball.y_vel = 8;
 
-  initSDL();       // Intialise
+  initSDL();     
   atexit(cleanup); // Destroy stuff
-
   drawBall(ball);
   drawEntity(player1);
   drawEntity(player2);
   presentScene();
+  
+  SDL_Color color ={255,0,0};  
+  text = TTF_RenderText_Solid(font,"Hello World!",color);
 
   SDL_Delay(3000);
 
@@ -94,13 +103,18 @@ int main(int argc, char *argv[]) {
 
     if (ball.rect.x + ball.rect.w >= SCREEN_WIDTH || ball.rect.x <= 0) {
       break;
-    }
+    }    
 
+    SDL_BlitSurface(text,NULL,screen,NULL);    
     drawBall(ball);
     drawEntity(player1);
     drawEntity(player2);
     presentScene();
     SDL_Delay(16);
   }
+  SDL_FreeSurface(text);
+  TTF_CloseFont(font);
+  font=NULL; 
+  TTF_Quit();
   return 0;
 }
