@@ -22,3 +22,7 @@ void drawEntity(Entity e)//, Entity f)
   //  drawRectangle(&f.rect, f.r, f.g, f.b);
 }
 
+void drawBall(Ball e) 
+{ 
+  drawRectangle(&e.rect, e.r, e.g, e.b); 
+}
