@@ -14,6 +14,7 @@ typedef struct {
   SDL_Rect rect;
   // Color
   Uint8 r, g, b;
+  int Score;
 } Object;
 
 typedef struct {
