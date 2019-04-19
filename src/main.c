@@ -99,16 +99,18 @@ int main(int argc, char *argv[]) {
       break;
     }    
 
-    if (ball.rect.x <= player1.rect.x + player1.rect.w)  
+    if ((ball.rect.x <= player1.rect.x + player1.rect.w && ball.rect.x >= player1.rect.x) || 
+        (ball.rect.x + ball.rect.w <= player1.rect.x + player1.rect.w && ball.rect.x + ball.rect.w >= player1.rect.x))  
         {
-            if (ball.rect.y + ball.rect.h <= player1.rect.y && ball.rect.y >= player1.rect.y + player1.rect.h || 
+            if (ball.rect.y + ball.rect.h == player1.rect.y || 
                 ball.rect.y == player1.rect.y + player1.rect.h) {
                 ball.y_vel = -ball.y_vel;
                 ball.x_vel = -ball.x_vel;
             }   
         }   
 
-    if (ball.rect.x + ball.rect.w >= player2.rect.x)  
+    if ((ball.rect.x + ball.rect.w >= player2.rect.x && ball.rect.x + ball.rect.w <= player2.rect.x + player2.rect.w) ||
+        (ball.rect.x >= player2.rect.x && ball.rect.x <= player2.rect.x + player2.rect.w))  
         {
             if (ball.rect.y + ball.rect.h <= player2.rect.y && ball.rect.y >= player2.rect.y + player2.rect.h || 
                 ball.rect.y == player2.rect.y + player2.rect.h) {
