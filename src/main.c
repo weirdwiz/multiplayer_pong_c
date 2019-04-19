@@ -2,30 +2,27 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-
 int main(int argc, char *argv[]) {
   srand(time(0));
   
-  TTF_Init();  // Intialise
-  TTF_Font *font;
-  font = TTF_OpenFont("/home/knownymous/Desktop/multiplayer_pong_c/src/OpenSans-Bold.ttf", 32);
   SDL_Surface *screen, *text;
-  // idk what this, is just go along
+  // idk what this is, just go along
   memset(&app, 0, sizeof(App));
   memset(&player1, 0, sizeof(Object));
   memset(&player2, 0, sizeof(Object));
   memset(&ball, 0, sizeof(Ball));
 
-  player1.rect.x = 30;                        // x coordinate of rectangle
+  player1.rect.x = 0;                        // x coordinate of rectangle
   player1.rect.y = (SCREEN_HEIGHT - 100) / 2; // y coordinate of rectange
   player1.rect.h = 100;                       // height of the rectangle
   player1.rect.w = 20;                        // width of the rectangle
+  
   // color value for RGB
   player1.r = 255;
   player1.g = 0;
   player1.b = 0;
 
-  player2.rect.x = 950;                       // x coordinate of rectangle
+  player2.rect.x = 980;                       // x coordinate of rectangle
   player2.rect.y = (SCREEN_HEIGHT - 100) / 2; // y coordinate of rectange
   player2.rect.h = 100;                       // height of the rectangle
   player2.rect.w = 20;                        // width of the rectangle
@@ -38,7 +35,7 @@ int main(int argc, char *argv[]) {
   ball.rect.x = SCREEN_WIDTH / 2;
   ball.rect.y = start_ball;
   ball.rect.h = 20;
-  ball.rect.w = 20;
+  ball.rect.w = 20; 
   ball.r = 255;
   ball.b = 0;
   ball.g = 255;
@@ -53,9 +50,6 @@ int main(int argc, char *argv[]) {
   drawEntity(player2);
   presentScene();
   
-  SDL_Color color ={255,0,0};  
-  text = TTF_RenderText_Solid(font,"Hello World!",color);
-
   SDL_Delay(3000);
 
   while (1) {
@@ -90,14 +84,14 @@ int main(int argc, char *argv[]) {
     }
 
     if (ball.rect.x <= player1.rect.x + player1.rect.w &&
-        (ball.rect.y >= player1.rect.y &&
-         ball.rect.y <= player1.rect.y + player1.rect.h)) {
+        (ball.rect.y + ball.rect.h >= player1.rect.y &&
+         ball.rect.y + ball.rect.h <= player1.rect.y + player1.rect.h)) {
       ball.x_vel = -ball.x_vel;
     }
 
     if (ball.rect.x + ball.rect.w >= player2.rect.x &&
-        (ball.rect.y >= player2.rect.y &&
-         ball.rect.y <= player2.rect.y + player2.rect.h)) {
+        (ball.rect.y + ball.rect.h >= player2.rect.y &&
+         ball.rect.y + ball.rect.h <= player2.rect.y + player2.rect.h)) {
       ball.x_vel = -ball.x_vel;
     }
 
@@ -105,16 +99,29 @@ int main(int argc, char *argv[]) {
       break;
     }    
 
-    SDL_BlitSurface(text,NULL,screen,NULL);    
+    if (ball.rect.x <= player1.rect.x + player1.rect.w)  
+        {
+            if (ball.rect.y + ball.rect.h <= player1.rect.y && ball.rect.y >= player1.rect.y + player1.rect.h || 
+                ball.rect.y == player1.rect.y + player1.rect.h) {
+                ball.y_vel = -ball.y_vel;
+                ball.x_vel = -ball.x_vel;
+            }   
+        }   
+
+    if (ball.rect.x + ball.rect.w >= player2.rect.x)  
+        {
+            if (ball.rect.y + ball.rect.h <= player2.rect.y && ball.rect.y >= player2.rect.y + player2.rect.h || 
+                ball.rect.y == player2.rect.y + player2.rect.h) {
+                ball.y_vel = -ball.y_vel;
+                ball.x_vel = -ball.x_vel;
+            }
+        }   
+
     drawBall(ball);
     drawEntity(player1);
     drawEntity(player2);
     presentScene();
     SDL_Delay(16);
   }
-  SDL_FreeSurface(text);
-  TTF_CloseFont(font);
-  font=NULL; 
-  TTF_Quit();
   return 0;
 }
