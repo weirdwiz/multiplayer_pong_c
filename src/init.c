@@ -29,3 +29,36 @@ void cleanup(void) {
   SDL_DestroyWindow(app.window);
   SDL_Quit();
 }
+
+void initPlayers(void) {
+  player1.rect.x = 0;                         // x coordinate of rectangle
+  player1.rect.y = (SCREEN_HEIGHT - 100) / 2; // y coordinate of rectange
+  player1.rect.h = 100;                       // height of the rectangle
+  player1.rect.w = 20;                        // width of the rectangle
+
+  // color value for RGB
+  player1.r = 255;
+  player1.g = 0;
+  player1.b = 0;
+
+  player2.rect.x = 980;                       // x coordinate of rectangle
+  player2.rect.y = (SCREEN_HEIGHT - 100) / 2; // y coordinate of rectange
+  player2.rect.h = 100;                       // height of the rectangle
+  player2.rect.w = 20;                        // width of the rectangle
+  // color value for RGB
+  player2.r = 0;
+  player2.g = 0;
+  player2.b = 255;
+
+  int start_ball = (rand() % (SCREEN_HEIGHT - 0 + 1));
+  ball.rect.x = SCREEN_WIDTH / 2;
+  ball.rect.y = start_ball;
+  ball.rect.h = 20;
+  ball.rect.w = 20;
+  ball.r = 255;
+  ball.b = 0;
+  ball.g = 255;
+
+  ball.x_vel = 8;
+  ball.y_vel = 8;
+}

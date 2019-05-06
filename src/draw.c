@@ -22,3 +22,9 @@ void drawEntity(Object e) //, Object f)
 }
 
 void drawBall(Ball e) { drawRectangle(&e.rect, e.r, e.g, e.b); }
+
+void draw() {
+  drawBall(ball);
+  drawEntity(player1);
+  drawEntity(player2);
+}

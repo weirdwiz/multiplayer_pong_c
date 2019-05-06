@@ -56,3 +56,47 @@ void doInput(void) {
     }
   }
 }
+
+void checkCollision(void) {
+  // checks the boundary conditions, so that the ball can bounce
+  if (ball.rect.y + ball.rect.h >= SCREEN_HEIGHT || ball.rect.y <= 0) {
+    ball.y_vel = -ball.y_vel;
+  }
+
+  // checks if the ball hit's player 1's paddle
+  if (ball.rect.x <= player1.rect.x + player1.rect.w &&
+      (ball.rect.y + ball.rect.h >= player1.rect.y &&
+       ball.rect.y + ball.rect.h <= player1.rect.y + player1.rect.h)) {
+    ball.x_vel = -ball.x_vel;
+  }
+
+  // checks if the ball hit's player 2's paddle
+  if (ball.rect.x + ball.rect.w >= player2.rect.x &&
+      (ball.rect.y + ball.rect.h >= player2.rect.y &&
+       ball.rect.y + ball.rect.h <= player2.rect.y + player2.rect.h)) {
+    ball.x_vel = -ball.x_vel;
+  }
+
+  if ((ball.rect.x <= player1.rect.x + player1.rect.w &&
+       ball.rect.x >= player1.rect.x) ||
+      (ball.rect.x + ball.rect.w <= player1.rect.x + player1.rect.w &&
+       ball.rect.x + ball.rect.w >= player1.rect.x)) {
+    if (ball.rect.y + ball.rect.h == player1.rect.y ||
+        ball.rect.y == player1.rect.y + player1.rect.h) {
+      ball.y_vel = -ball.y_vel;
+      ball.x_vel = -ball.x_vel;
+    }
+  }
+
+  if ((ball.rect.x + ball.rect.w >= player2.rect.x &&
+       ball.rect.x + ball.rect.w <= player2.rect.x + player2.rect.w) ||
+      (ball.rect.x >= player2.rect.x &&
+       ball.rect.x <= player2.rect.x + player2.rect.w)) {
+    if (ball.rect.y + ball.rect.h <= player2.rect.y &&
+            ball.rect.y >= player2.rect.y + player2.rect.h ||
+        ball.rect.y == player2.rect.y + player2.rect.h) {
+      ball.y_vel = -ball.y_vel;
+      ball.x_vel = -ball.x_vel;
+    }
+  }
+}
