@@ -40,6 +40,8 @@ void initPlayers(void) {
   player1.r = 255;
   player1.g = 0;
   player1.b = 0;
+  player1.Score = 0;
+  player2.Score = 0;
 
   player2.rect.x = 980;                       // x coordinate of rectangle
   player2.rect.y = (SCREEN_HEIGHT - 100) / 2; // y coordinate of rectange

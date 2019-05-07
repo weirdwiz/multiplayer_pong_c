@@ -1,9 +1,10 @@
 #include "main.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 
 int main(int argc, char *argv[]) {
   srand(time(0));
+
+  int count = 3;
 
   // idk what is this, just go along
   memset(&app, 0, sizeof(App));
@@ -14,9 +15,11 @@ int main(int argc, char *argv[]) {
   initSDL();
   initPlayers();
   atexit(cleanup); // Destroy stuff
+  draw();
+  presentScene();
   SDL_Delay(3000);
 
-  while (1) {
+  while (count > 0) {
     prepareScene();
     doInput();
     // controls for player 1
@@ -45,12 +48,31 @@ int main(int argc, char *argv[]) {
     checkCollision();
 
     // if the ball touches the vertical walls the game ends
-    if (ball.rect.x + ball.rect.w >= SCREEN_WIDTH || ball.rect.x <= 0) {
-      break;
+    if (ball.rect.x - ball.rect.w >= SCREEN_WIDTH) {
+        player1.Score++;    
+        ball.rect.x = SCREEN_WIDTH/2;
+        ball.rect.y = (rand() % (SCREEN_HEIGHT - 0 + 1));
+        count--;
+        prepareScene();
+        draw();
+        presentScene();
+        SDL_Delay(1000);
+    } 
+    else if(ball.rect.x + ball.rect.w <= 0) {
+        player2.Score++;
+        ball.rect.x = SCREEN_WIDTH/2;
+        ball.rect.y = (rand() % (SCREEN_HEIGHT - 0 + 1));
+        count--;
+        prepareScene();
+        draw();
+        presentScene();
+        SDL_Delay(1000);
     }
     draw();
     presentScene();
     SDL_Delay(16);
   }
+  printf("Player 1: %d\n",player1.Score);
+  printf("Player 2: %d\n",player2.Score);
   return 0;
 }
