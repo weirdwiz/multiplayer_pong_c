@@ -1,5 +1,4 @@
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_ttf.h"
 #include "ctype.h"
 #include "defs.h"
 #include "math.h"
